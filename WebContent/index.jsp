@@ -5,6 +5,7 @@ import="java.net.URL,javax.xml.namespace.QName,javax.xml.ws.Service,org.tomcat.s
 <title>Calculator</title>
 </head>
 <body>
+<!-- Taking 2 numbers as input  -->
 <form action="result.jsp">
 Please enter 2 whole numbers to add: 
 	<input type="text" name="value1"> + <input type="text" name="value2">
