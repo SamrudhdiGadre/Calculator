@@ -8,6 +8,7 @@ import="java.net.URL,javax.xml.namespace.QName,javax.xml.ws.Service,org.tomcat.s
 int value1 = 0;
 int value2 = 0;
 int sum = 0;
+//This block gets the input values and returns the sum
 try {
 System.out.println( request.getParameter( "value1" ) + " " +
 request.getParameter( "value2" ) );
