@@ -5,13 +5,13 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. -->
 
-<project basedir="." default="jar" name="jaxws-Calculator">
+<project basedir="." default="war" name="jaxws-Calculator">
     <property environment="env"/>
     <property name="build.dir" value="build"/>
     <property name="src.dir" value="src"/>
 	<property name = "full-compile" value = "true" /> 
 	<property name="classes.dir" value="${build.dir}/classes"/>
-	<property name="jar.dir"     value="${build.dir}/jar"/>
+	<property name="war.dir"     value="${build.dir}/war"/>
 	<property name="main-class"  value="jaxws-Calculator"/>
 
 	
@@ -29,13 +29,17 @@
         <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" compiler="modern" verbose="${full-compile}" />
     </target>
 	
-	<target name="jar" depends="build">
-	        <mkdir dir="${jar.dir}"/>
-	        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
-	            <manifest>
-	                <attribute name="Main-Class" value="${main-class}"/>
-	            </manifest>
-	        </jar>
-	    </target>
+	<target name="war" description="Bundles the application as a WAR file" depends="build">
+		<mkdir dir="WebContent/WEB-INF/classes"/>
+		<mkdir dir="${war.dir}"/>
+		
+		<copy includeemptydirs="false" todir="WebContent/WEB-INF/classes" >
+			<fileset dir="${classes.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</copy>
+		
+		<war destfile="${war.dir}/${ant.project.name}.war" basedir="WebContent" />
+	</target>
 	
 </project>
